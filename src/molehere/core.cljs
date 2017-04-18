@@ -1,7 +1,7 @@
 (ns molehere.core
   (:require [play-cljs.core :as p]))
 
-(defonce game (p/create-game 500 500))
+(defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
 
 (def main-screen
@@ -11,13 +11,9 @@
     (on-hide [this])
     (on-render [this]
       (p/render game
-        [[:fill {:color "lightblue"}
-          [:rect {:x 0 :y 0 :width 500 :height 500}]]
-         [:fill {:color "black"}
-          [:text {:value "Hello, world!" :x (:text-x @state) :y (:text-y @state) :size 16 :font "Georgia" :style :italic}]]])
+        [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]])
       (swap! state update :text-x inc))))
 
 (doto game
   (p/start)
   (p/set-screen main-screen))
-
