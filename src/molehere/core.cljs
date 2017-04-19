@@ -11,7 +11,8 @@
     (on-hide [this])
     (on-render [this]
       (p/render game
-        [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]])
+                [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]
+                 [:image {:name "images/mole.png" :x 10 :y 400 :sx 0 :swidth 200 :sheight 170}]])
       (swap! state update :text-x inc))))
 
 (doto game
