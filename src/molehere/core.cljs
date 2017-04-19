@@ -1,6 +1,71 @@
 (ns molehere.core
   (:require [play-cljs.core :as p]))
 
+(def ^:const mole-width 200)
+(def ^:const mole-height 170)
+
+(def ^:const spawn [:animation {:duration 50}
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 0 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 1 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 2 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 3 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 4 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
+                    [:image {:name "images/mole.png" :sx (* 5 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]])
+
 (defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
 
@@ -12,7 +77,8 @@
     (on-render [this]
       (p/render game
                 [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]
-                 [:image {:name "images/mole.png" :x 10 :y 400 :sx 0 :swidth 200 :sheight 170}]])
+                 [:div {:x 0 :y 400}
+                  spawn]])
       (swap! state update :text-x inc))))
 
 (doto game
