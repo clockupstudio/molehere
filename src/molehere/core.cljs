@@ -5,67 +5,70 @@
 (def ^:const mole-height 170)
 (def ^:const mole-image-path "images/mole.png")
 
+(defn mole-frame [x-frame y-frame]
+  [:image {:name mole-image-path :sx (* x-frame mole-width) :sy (* y-frame mole-height) :swidth mole-width :sheight mole-height}])
+
 (def ^:const spawn [:animation {:duration 50}
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 0 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 1 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 2 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 3 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 4 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 5 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 6 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 7 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 8 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 0 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 1 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 2 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 3 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 4 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]
-                    [:image {:name mole-image-path :sx (* 5 mole-width) :sy (* 9 mole-height) :swidth mole-width :sheight mole-height}]])
+                    (mole-frame 0 0)
+                    (mole-frame 1 0)
+                    (mole-frame 2 0)
+                    (mole-frame 3 0)
+                    (mole-frame 4 0)
+                    (mole-frame 5 0)
+                    (mole-frame 0 1)
+                    (mole-frame 1 1)
+                    (mole-frame 2 1)
+                    (mole-frame 3 1)
+                    (mole-frame 4 1)
+                    (mole-frame 5 1)
+                    (mole-frame 0 2)
+                    (mole-frame 1 2)
+                    (mole-frame 2 2)
+                    (mole-frame 3 2)
+                    (mole-frame 4 2)
+                    (mole-frame 5 2)
+                    (mole-frame 0 3)
+                    (mole-frame 1 3)
+                    (mole-frame 2 3)
+                    (mole-frame 3 3)
+                    (mole-frame 4 3)
+                    (mole-frame 5 3)
+                    (mole-frame 0 4)
+                    (mole-frame 1 4)
+                    (mole-frame 2 4)
+                    (mole-frame 3 4)
+                    (mole-frame 4 4)
+                    (mole-frame 5 4)
+                    (mole-frame 0 5)
+                    (mole-frame 1 5)
+                    (mole-frame 2 5)
+                    (mole-frame 3 5)
+                    (mole-frame 4 5)
+                    (mole-frame 5 5)
+                    (mole-frame 0 6)
+                    (mole-frame 1 6)
+                    (mole-frame 2 6)
+                    (mole-frame 3 6)
+                    (mole-frame 4 6)
+                    (mole-frame 5 6)
+                    (mole-frame 0 7)
+                    (mole-frame 1 7)
+                    (mole-frame 2 7)
+                    (mole-frame 3 7)
+                    (mole-frame 4 7)
+                    (mole-frame 5 7)
+                    (mole-frame 0 8)
+                    (mole-frame 1 8)
+                    (mole-frame 2 8)
+                    (mole-frame 3 8)
+                    (mole-frame 4 8)
+                    (mole-frame 5 8)
+                    (mole-frame 0 9)
+                    (mole-frame 1 9)
+                    (mole-frame 2 9)
+                    (mole-frame 3 9)
+                    (mole-frame 4 9)
+                    (mole-frame 5 9)])
 
 (defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
