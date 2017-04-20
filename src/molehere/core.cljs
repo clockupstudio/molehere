@@ -8,7 +8,7 @@
 (defn mole-frame [x-frame y-frame]
   [:image {:name mole-image-path :sx (* x-frame mole-width) :sy (* y-frame mole-height) :swidth mole-width :sheight mole-height}])
 
-(def ^:const spawn [:animation {:duration 50}
+(def ^:const spawn [:animation {:duration 25}
                     (mole-frame 0 0)
                     (mole-frame 1 0)
                     (mole-frame 2 0)
@@ -81,7 +81,7 @@
     (on-render [this]
       (p/render game
                 [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]
-                 [:div {:x 0 :y 400}
+                 [:div {:x 10 :y 400}
                   spawn]])
       (swap! state update :text-x inc))))
 
