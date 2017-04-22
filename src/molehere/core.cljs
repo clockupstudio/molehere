@@ -70,20 +70,47 @@
                     (mole-frame 4 9)
                     (mole-frame 5 9)])
 
+(def ^:const positions
+  ;; row 1
+  [{:x 10 :y 400}
+   {:x 150 :y 400}
+   {:x 290 :y 400}
+   {:x 430 :y 400}
+   {:x 570 :y 400}
+
+   ;; row 2
+   {:x 10 :y (+ (* 1 170) 400)}
+   {:x 150 :y (+ (* 1 170) 400)}
+   {:x 290 :y (+ (* 1 170) 400)}
+   {:x 430 :y (+ (* 1 170) 400)}
+   {:x 570 :y (+ (* 1 170) 400)}
+
+   ;; row 3
+   {:x 10 :y (+ (* 2 170) 400)}
+   {:x 150 :y (+ (* 2 170) 400)}
+   {:x 290 :y (+ (* 2 170) 400)}
+   {:x 430 :y (+ (* 2 170) 400)}
+   {:x 570 :y (+ (* 2 170) 400)}
+
+   ;; row 4
+   {:x 10 :y (+ (* 3 170) 400)}
+   {:x 150 :y (+ (* 3 170) 400)}
+   {:x 290 :y (+ (* 3 170) 400)}
+   {:x 430 :y (+ (* 3 170) 400)}
+   {:x 570 :y (+ (* 3 170) 400)}])
+
 (defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
 
 (def main-screen
   (reify p/Screen
     (on-show [this]
-      (reset! state {:text-x 20 :text-y 30}))
+      (reset! state {:pos (nth positions (rand-int (count positions)))}))
     (on-hide [this])
     (on-render [this]
       (p/render game
-                [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]
-                 [:div {:x 10 :y 400}
-                  spawn]])
-      (swap! state update :text-x inc))))
+                [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]])
+      (p/render game [[:div (:pos @state) spawn]]))))
 
 (doto game
   (p/start)
