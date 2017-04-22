@@ -1,5 +1,6 @@
 (ns molehere.core
-  (:require [play-cljs.core :as p]))
+  (:require [play-cljs.core :as p]
+            [goog.events :as events]))
 
 (def ^:const mole-width 200)
 (def ^:const mole-height 170)
@@ -70,6 +71,20 @@
                     (mole-frame 4 9)
                     (mole-frame 5 9)])
 
+(def ^:const dead [:animation {:duration 25}
+                   (mole-frame 5 12)
+                   (mole-frame 6 12)
+                   (mole-frame 0 13)
+                   (mole-frame 1 13)
+                   (mole-frame 2 13)
+                   (mole-frame 3 13)
+                   (mole-frame 4 13)
+                   (mole-frame 5 13)
+                   (mole-frame 0 14)
+                   (mole-frame 1 14)
+                   (mole-frame 2 14)
+                   (mole-frame 3 14)])
+
 (def ^:const positions
   ;; row 1
   [{:x 10 :y 400}
@@ -102,15 +117,25 @@
 (defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
 
+(defn hit-mole? [pos]
+  true)
+
+(events/listen js/window events/EventType.CLICK
+               (fn [evt]
+                 (when (hit-mole? {:x (.-clientX evt) :y (.-clientY evt)})
+                   (reset! state (assoc @state :mole-state dead)))))
+
 (def main-screen
   (reify p/Screen
     (on-show [this]
-      (reset! state {:pos (nth positions (rand-int (count positions)))}))
+      (let [pos (nth positions (rand-int (count positions)))]
+        (reset! state {:pos pos
+                       :mole-state spawn})))
     (on-hide [this])
     (on-render [this]
       (p/render game
                 [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]])
-      (p/render game [[:div (:pos @state) spawn]]))))
+      (p/render game [[:div (:pos @state) (:mole-state @state)]]))))
 
 (doto game
   (p/start)

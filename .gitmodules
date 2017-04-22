@@ -1,0 +1,3 @@
+[submodule "lib/play-cljs"]
+	path = lib/play-cljs
+	url = git@github.com:wingyplus/play-cljs.git

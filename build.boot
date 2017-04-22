@@ -1,5 +1,5 @@
 (set-env!
-  :source-paths #{"src"}
+  :source-paths #{"src", "lib/play-cljs/src"}
   :resource-paths #{"resources"}
   :dependencies '[[adzerk/boot-cljs "1.7.228-2" :scope "test"]
                   [adzerk/boot-reload "0.4.12" :scope "test"]
@@ -7,7 +7,7 @@
                    :exclusions [org.clojure/clojure]]
                   ; project deps
                   [org.clojure/clojurescript "1.9.473"]
-                  [play-cljs "0.10.1"]])
+                  [org.clojure/core.async "0.3.442"]])
 
 (require
   '[adzerk.boot-cljs :refer [cljs]]
@@ -24,4 +24,3 @@
 
 (deftask build []
   (comp (cljs :optimizations :advanced) (target)))
-
