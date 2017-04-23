@@ -129,19 +129,6 @@
    (and (> (:y pos) (:y (:pos @state)))
         (< (:y pos) (+ (:y (:pos @state)) mole-height)))))
 
-(events/listen js/window events/EventType.CLICK
-               (fn [evt]
-                 (when (hit-mole? {:x (.-clientX evt) :y (.-clientY evt)})
-                   (.play punch)
-                   (reset! state (assoc @state :mole-state dead))
-                   (.setTimeout js/window
-                                (fn []
-                                  (reset! state {:pos (random-mole-position)
-                                                 :mole-state spawn
-                                                 :score (+ 100 (:score @state))
-                                                 :life (:life @state)}))
-                                (* 25 11)))))
-
 (def game-over-screen
   (reify p/Screen
     (on-show [this])
@@ -149,21 +136,42 @@
     (on-render [this]
       (p/render game [[:text {:value "game over" :x 0 :y 640 :size 96}]]))))
 
+(defn create-timeout []
+  (.clearTimeout js/window (:timeout @state))
+  (.setTimeout js/window
+               (fn []
+                 (if (> (:life @state) 1)
+                   (reset! state (assoc @state
+                                        :life (dec (:life @state))
+                                        :pos (random-mole-position)
+                                        :timeout (create-timeout)))
+                   (p/set-screen game game-over-screen)))
+               (* 25 (- 72 13))))
+
+(events/listen js/window events/EventType.CLICK
+               (fn [evt]
+                 (let [hit? (hit-mole? {:x (.-clientX evt) :y (.-clientY evt)})]
+                   (when hit?
+                     (.play punch)
+                     (reset! state (assoc @state :mole-state dead))
+                     (.setTimeout js/window
+                                  (fn []
+                                    (reset! state {:pos (random-mole-position)
+                                                   :mole-state spawn
+                                                   :score (+ 100 (:score @state))
+                                                   :life (:life @state)
+                                                   :timeout (create-timeout)}))
+                                  (* 25 11))))))
+
+
 (def main-screen
   (reify p/Screen
     (on-show [this]
       (reset! state {:pos (random-mole-position)
                      :mole-state spawn
                      :score 0
-                     :life 5})
-      (.setInterval js/window
-                   (fn []
-                     (if (> (:life @state) 1)
-                       (reset! state (assoc @state
-                                            :life (dec (:life @state))
-                                            :pos (random-mole-position)))
-                       (p/set-screen game game-over-screen)))
-                   (* 25 (- 72 13))))
+                     :life 5
+                     :timeout (create-timeout)}))
     (on-hide [this])
     (on-render [this]
       (p/render game
