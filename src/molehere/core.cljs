@@ -150,7 +150,7 @@
 
 (events/listen js/window events/EventType.CLICK
                (fn [evt]
-                 (let [hit? (hit-mole? {:x (.-clientX evt) :y (.-clientY evt)})]
+                 (let [hit? (hit-mole? {:x (.-offsetX evt) :y (.-offsetY evt)})]
                    (when hit?
                      (.play punch)
                      (reset! state (assoc @state :mole-state dead))
