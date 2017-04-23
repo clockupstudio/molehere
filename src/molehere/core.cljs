@@ -125,8 +125,12 @@
   ;mouse x < mole x + mole width
   ;mouse y > mole y
   ;mouse y < mole y + mole height
-    (and (> (:x pos) (:x (:pos @state) ) )
-      (< (:x pos) (+ (:x (:pos @state)) mole-width ) )
+
+    (and
+      (and (> (:x pos) (:x (:pos @state) ) )
+           (< (:x pos) (+ (:x (:pos @state)) mole-width ) ))
+      (and (> (:y pos) (:y (:pos @state) ) )
+           (< (:y pos) (+ (:y (:pos @state)) mole-height ) ))
     )
   )
 
