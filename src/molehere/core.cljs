@@ -118,14 +118,6 @@
 (defonce state (atom {}))
 
 (defn hit-mole? [pos]
-  (.log js/console "x" (:x pos) (:x (:pos @state)))
-  (.log js/console "y" (:y pos) (:y (:pos @state)))
-
-  ;mouse x > mole x
-  ;mouse x < mole x + mole width
-  ;mouse y > mole y
-  ;mouse y < mole y + mole height
-
     (and
       (and (> (:x pos) (:x (:pos @state) ) )
            (< (:x pos) (+ (:x (:pos @state)) mole-width ) ))
