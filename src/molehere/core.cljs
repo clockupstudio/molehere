@@ -137,18 +137,22 @@
                    (.setTimeout js/window
                                 (fn []
                                   (reset! state {:pos (random-mole-position)
-                                                 :mole-state spawn}))
+                                                 :mole-state spawn
+                                                 :score (+ 100 (:score @state))}))
                                 (* 25 11)))))
 
 (def main-screen
   (reify p/Screen
     (on-show [this]
       (reset! state {:pos (random-mole-position)
-                     :mole-state spawn}))
+                     :mole-state spawn
+                     :score 0}))
     (on-hide [this])
     (on-render [this]
       (p/render game
                 [[:image {:name "images/background.jpg" :x 0 :y 0 :width 720 :height 1280}]])
+      (p/render game
+                [[:text {:value (str (:score @state)) :x 0 :y 100 :size 96}]])
       (p/render game [[:div (:pos @state) (:mole-state @state)]]))))
 
 (doto game
