@@ -127,7 +127,13 @@
 (events/listen js/window events/EventType.CLICK
                (fn [evt]
                  (when (hit-mole? {:x (.-clientX evt) :y (.-clientY evt)})
-                   (reset! state (assoc @state :mole-state dead)))))
+                   (reset! state (assoc @state :mole-state dead))
+                   (.setTimeout js/window
+                                (fn []
+                                   (reset! state (assoc @state
+                                                        :pos (nth positions (rand-int (count positions)))
+                                                        :mole-state spawn)))
+                                (* 25 11)))))
 
 (def main-screen
   (reify p/Screen
