@@ -115,7 +115,9 @@
    {:x 570 :y (+ (* 3 170) 400)}])
 
 (defn random-mole-position []
-   (nth positions (rand-int (count positions))))
+  (nth positions (rand-int (count positions))))
+
+(def ^:const punch (js/Audio. "sounds/punch.m4a"))
 
 (defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
@@ -130,6 +132,7 @@
 (events/listen js/window events/EventType.CLICK
                (fn [evt]
                  (when (hit-mole? {:x (.-clientX evt) :y (.-clientY evt)})
+                   (.play punch)
                    (reset! state (assoc @state :mole-state dead))
                    (.setTimeout js/window
                                 (fn []
