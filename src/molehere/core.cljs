@@ -114,6 +114,9 @@
    {:x 430 :y (+ (* 3 170) 400)}
    {:x 570 :y (+ (* 3 170) 400)}])
 
+(defn random-mole-position []
+   (nth positions (rand-int (count positions))))
+
 (defonce game (p/create-game 720 1280))
 (defonce state (atom {}))
 
@@ -130,17 +133,15 @@
                    (reset! state (assoc @state :mole-state dead))
                    (.setTimeout js/window
                                 (fn []
-                                   (reset! state (assoc @state
-                                                        :pos (nth positions (rand-int (count positions)))
-                                                        :mole-state spawn)))
+                                  (reset! state {:pos (random-mole-position)
+                                                 :mole-state spawn}))
                                 (* 25 11)))))
 
 (def main-screen
   (reify p/Screen
     (on-show [this]
-      (let [pos (nth positions (rand-int (count positions)))]
-        (reset! state {:pos pos
-                       :mole-state spawn})))
+      (reset! state {:pos (random-mole-position)
+                     :mole-state spawn}))
     (on-hide [this])
     (on-render [this]
       (p/render game
