@@ -142,13 +142,28 @@
                                                  :life (:life @state)}))
                                 (* 25 11)))))
 
+(def game-over-screen
+  (reify p/Screen
+    (on-show [this])
+    (on-hide [this])
+    (on-render [this]
+      (p/render game [[:text {:value "game over" :x 0 :y 640 :size 96}]]))))
+
 (def main-screen
   (reify p/Screen
     (on-show [this]
       (reset! state {:pos (random-mole-position)
                      :mole-state spawn
                      :score 0
-                     :life 5}))
+                     :life 5})
+      (.setInterval js/window
+                   (fn []
+                     (if (> (:life @state) 1)
+                       (reset! state (assoc @state
+                                            :life (dec (:life @state))
+                                            :pos (random-mole-position)))
+                       (p/set-screen game game-over-screen)))
+                   (* 25 (- 72 13))))
     (on-hide [this])
     (on-render [this]
       (p/render game
