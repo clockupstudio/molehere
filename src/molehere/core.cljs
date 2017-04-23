@@ -118,13 +118,11 @@
 (defonce state (atom {}))
 
 (defn hit-mole? [pos]
-    (and
-      (and (> (:x pos) (:x (:pos @state) ) )
-           (< (:x pos) (+ (:x (:pos @state)) mole-width ) ))
-      (and (> (:y pos) (:y (:pos @state) ) )
-           (< (:y pos) (+ (:y (:pos @state)) mole-height ) ))
-    )
-  )
+  (and
+   (and (> (:x pos) (:x (:pos @state)))
+        (< (:x pos) (+ (:x (:pos @state)) mole-width)))
+   (and (> (:y pos) (:y (:pos @state)))
+        (< (:y pos) (+ (:y (:pos @state)) mole-height)))))
 
 (events/listen js/window events/EventType.CLICK
                (fn [evt]
